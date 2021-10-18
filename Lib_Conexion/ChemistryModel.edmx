@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="chemistryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="id_articulo" />
+          </Key>
+          <Property Name="id_articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_articulo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="30" />
+          <Property Name="cantidad_disponible" Type="int" Nullable="false" />
+          <Property Name="estado_articulo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="precio" Type="int" Nullable="false" />
+          <Property Name="url_imagen" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="articulo_pedido">
+          <Key>
+            <PropertyRef Name="id_artped" />
+          </Key>
+          <Property Name="id_artped" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pedido" Type="int" Nullable="false" />
+          <Property Name="id_articulo" Type="int" Nullable="false" />
+          <Property Name="cantidad_solicitada" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pedido">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="estado_pedido" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="fecha_solicitud" Type="date" />
+          <Property Name="fecha_entrega" Type="date" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="edad" Type="int" Nullable="false" />
+          <Property Name="tipo_usuario" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="estado_usuario" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_id_articulo">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="articulo_pedido" Type="Self.articulo_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="id_articulo" />
+            </Principal>
+            <Dependent Role="articulo_pedido">
+              <PropertyRef Name="id_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_pedido">
+          <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+          <End Role="articulo_pedido" Type="Self.articulo_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedido">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="articulo_pedido">
+              <PropertyRef Name="id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="chemistryModelStoreContainer">
+          <EntitySet Name="articulo" EntityType="Self.articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articulo_pedido" EntityType="Self.articulo_pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pedido" EntityType="Self.pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_id_articulo" Association="Self.fk_id_articulo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="articulo_pedido" EntitySet="articulo_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_pedido" Association="Self.fk_id_pedido">
+            <End Role="pedido" EntitySet="pedido" />
+            <End Role="articulo_pedido" EntitySet="articulo_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_usuario" Association="Self.fk_id_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="chemistryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="id_articulo" />
+          </Key>
+          <Property Name="id_articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_articulo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad_disponible" Type="Int32" Nullable="false" />
+          <Property Name="estado_articulo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precio" Type="Int32" Nullable="false" />
+          <Property Name="url_imagen" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="articulo_pedido" Relationship="Self.fk_id_articulo" FromRole="articulo" ToRole="articulo_pedido" />
+        </EntityType>
+        <EntityType Name="articulo_pedido">
+          <Key>
+            <PropertyRef Name="id_artped" />
+          </Key>
+          <Property Name="id_artped" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pedido" Type="Int32" Nullable="false" />
+          <Property Name="id_articulo" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_solicitada" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="articulo" Relationship="Self.fk_id_articulo" FromRole="articulo_pedido" ToRole="articulo" />
+          <NavigationProperty Name="pedido" Relationship="Self.fk_id_pedido" FromRole="articulo_pedido" ToRole="pedido" />
+        </EntityType>
+        <EntityType Name="pedido">
+          <Key>
+            <PropertyRef Name="id_pedido" />
+          </Key>
+          <Property Name="id_pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="estado_pedido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_solicitud" Type="DateTime" Precision="0" />
+          <Property Name="fecha_entrega" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="articulo_pedido" Relationship="Self.fk_id_pedido" FromRole="pedido" ToRole="articulo_pedido" />
+          <NavigationProperty Name="usuario" Relationship="Self.fk_id_usuario" FromRole="pedido" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="edad" Type="Int32" Nullable="false" />
+          <Property Name="tipo_usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado_usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="pedido" Relationship="Self.fk_id_usuario" FromRole="usuario" ToRole="pedido" />
+        </EntityType>
+        <Association Name="fk_id_articulo">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="articulo_pedido" Type="Self.articulo_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="id_articulo" />
+            </Principal>
+            <Dependent Role="articulo_pedido">
+              <PropertyRef Name="id_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_pedido">
+          <End Role="pedido" Type="Self.pedido" Multiplicity="1" />
+          <End Role="articulo_pedido" Type="Self.articulo_pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedido">
+              <PropertyRef Name="id_pedido" />
+            </Principal>
+            <Dependent Role="articulo_pedido">
+              <PropertyRef Name="id_pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_id_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="pedido" Type="Self.pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="pedido">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="chemistryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="articulo" EntityType="Self.articulo" />
+          <EntitySet Name="articulo_pedido" EntityType="Self.articulo_pedido" />
+          <EntitySet Name="pedido" EntityType="Self.pedido" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="fk_id_articulo" Association="Self.fk_id_articulo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="articulo_pedido" EntitySet="articulo_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_pedido" Association="Self.fk_id_pedido">
+            <End Role="pedido" EntitySet="pedido" />
+            <End Role="articulo_pedido" EntitySet="articulo_pedido" />
+          </AssociationSet>
+          <AssociationSet Name="fk_id_usuario" Association="Self.fk_id_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="pedido" EntitySet="pedido" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="chemistryModelStoreContainer" CdmEntityContainer="chemistryEntities">
+          <EntitySetMapping Name="articulo">
+            <EntityTypeMapping TypeName="chemistryModel.articulo">
+              <MappingFragment StoreEntitySet="articulo">
+                <ScalarProperty Name="id_articulo" ColumnName="id_articulo" />
+                <ScalarProperty Name="nombre_articulo" ColumnName="nombre_articulo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad_disponible" ColumnName="cantidad_disponible" />
+                <ScalarProperty Name="estado_articulo" ColumnName="estado_articulo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="url_imagen" ColumnName="url_imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articulo_pedido">
+            <EntityTypeMapping TypeName="chemistryModel.articulo_pedido">
+              <MappingFragment StoreEntitySet="articulo_pedido">
+                <ScalarProperty Name="id_artped" ColumnName="id_artped" />
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+                <ScalarProperty Name="id_articulo" ColumnName="id_articulo" />
+                <ScalarProperty Name="cantidad_solicitada" ColumnName="cantidad_solicitada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pedido">
+            <EntityTypeMapping TypeName="chemistryModel.pedido">
+              <MappingFragment StoreEntitySet="pedido">
+                <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="estado_pedido" ColumnName="estado_pedido" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="chemistryModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="tipo_usuario" ColumnName="tipo_usuario" />
+                <ScalarProperty Name="estado_usuario" ColumnName="estado_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

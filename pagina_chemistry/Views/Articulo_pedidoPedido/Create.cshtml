@@ -1,0 +1,33 @@
+﻿@model Lib_clases.Articulo_pedido
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+@Html.ValidationSummary()
+
+<div class="container">
+    <div class="col-lg-offset-5">
+
+        <h2>Crear Articulo Pedido</h2>
+
+        @using (Html.BeginForm())
+        {
+
+            @Html.LabelFor(p => p.Id_articulo); <br />
+            @Html.TextBoxFor(p => p.Id_articulo, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Id_pedido); <br />
+            @Html.TextBoxFor(p => p.Id_pedido, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Cantidad_solicitada); <br />
+            @Html.TextBoxFor(p => p.Cantidad_solicitada, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            <br />
+            <button>Guardar</button>
+
+        }
+
+    </div>
+</div>
+

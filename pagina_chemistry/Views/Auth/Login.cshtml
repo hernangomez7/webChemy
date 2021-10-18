@@ -1,0 +1,28 @@
+﻿@model Lib_clases.Usuario
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container">
+    <div class="col-lg-offset-5">
+        <h2>Ingresa tus credenciales</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.LabelFor(u => u.Nombre_usuario) <br />
+            @Html.TextBoxFor(u => u.Nombre_usuario, new { @class = "aDatePicker", autocomplete = "off" })
+            <br />
+            @Html.LabelFor(u => u.Clave) <br />
+            @Html.TextBoxFor(u => u.Clave, new { @class = "aDatePicker", autocomplete = "off" })
+            <br />
+            <button>Ingresar</button>
+            <input onclick="document.location.href = '@Url.Content("~/Usuario/Create")'" type="button" value="Crear Usuario" />
+        }
+        @TempData["mensaje"]
+    </div>
+</div>
+
+
+
+

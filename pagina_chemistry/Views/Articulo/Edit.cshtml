@@ -1,0 +1,45 @@
+﻿@model Lib_clases.Articulo
+@using Lib_clases
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+
+<div class="container">
+    <div class="col-lg-offset-5">
+
+        <h2>Modficar Articulo</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(p => p.Id_articulo)
+
+            @Html.LabelFor(p => p.Nnombre_articulo); <br />
+            @Html.TextBoxFor(p => p.Nnombre_articulo, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Descripcion); <br />
+            @Html.TextBoxFor(p => p.Descripcion, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Cantidad_disponible); <br />
+            @Html.TextBoxFor(p => p.Cantidad_disponible, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Estado_articulo); <br />
+            @Html.DropDownListFor(p => p.Estado_articulo,
+                     new SelectList(Enum.GetValues(typeof(e_estado_articulo))))
+            <br />
+            @Html.LabelFor(p => p.Precio); <br />
+            @Html.TextBoxFor(p => p.Precio);
+            <br />
+            @Html.LabelFor(p => p.Url_imagen); <br />
+            @Html.TextBoxFor(p => p.Url_imagen, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+
+            <button>Modificar</button>
+
+        }
+
+    </div>
+</div>
+
+

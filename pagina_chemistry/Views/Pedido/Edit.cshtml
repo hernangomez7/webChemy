@@ -1,0 +1,37 @@
+﻿@model Lib_clases.Pedido
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+
+<div class="container">
+    <div class="col-lg-offset-5">
+
+        <h2>Modficar Pedido</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(p => p.Id_pedido)<br />
+
+            @Html.LabelFor(p => p.Id_usuario);<br />
+            @Html.TextBoxFor(p => p.Id_usuario, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Estado_pedido);<br />
+            @Html.TextBoxFor(p => p.Estado_pedido, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Fecha_solicitud);<br />
+            @Html.TextBoxFor(p => p.Fecha_solicitud, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            @Html.LabelFor(p => p.Fecha_entrega);<br />
+            @Html.TextBoxFor(p => p.Fecha_entrega, new { @class = "aDatePicker", autocomplete = "off" });
+            <br />
+            <br />
+            <button>Modificar</button>
+        }
+
+    </div>
+</div>
+
+
+

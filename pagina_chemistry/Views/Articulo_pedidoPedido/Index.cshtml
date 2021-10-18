@@ -1,0 +1,47 @@
+﻿@using Lib_clases
+
+@{
+    ViewBag.Title = "Articulos Pedidos";
+}
+
+@{
+    List<Articulo_pedido> articulo_pedidos = (List<Articulo_pedido>)ViewBag.articulo_pedidos;
+}
+
+<div class="container">
+    <div class="col-lg-offset-3">
+
+        <h2>Listado de Articulos Pedidos</h2>
+
+        <table>
+            <tr>
+                <th>Id_artped</th>
+                <th>Id_pedido</th>
+                <th>Id_articulo</th>
+                <th>Cantidad_solicitada</th>
+                <th></th>
+            </tr>
+            @{
+                foreach (var articulo_pedido in articulo_pedidos)
+                {
+                    <tr>
+                        <td>@articulo_pedido.Id_artped</td>
+                        <td>@articulo_pedido.Id_pedido</td>
+                        <td>@articulo_pedido.Id_articulo</td>
+                        <td>@articulo_pedido.Cantidad_solicitada</td>
+                        <td> <input onclick="document.location.href = '@Url.Content("~/Articulo_pedidoPedido/Edit/?Id="+articulo_pedido.Id_artped)'" type="button" value="Editar" /> </td>
+                        <td> <input onclick="document.location.href = '@Url.Content("~/Articulo_pedidoPedido/Delete/?Id="+articulo_pedido.Id_artped)'" type="button" value="Eliminar" /> </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+        @TempData["mensaje"]
+
+    </div>
+</div>
+
+
+
+

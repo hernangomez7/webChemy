@@ -1,0 +1,60 @@
+﻿@using Lib_clases
+
+@{
+    ViewBag.Title = "Articulo";
+}
+
+<h2>Listado de Articulos</h2>
+
+@{
+    List<Articulo> articulos = (List<Articulo>)ViewBag.articulos;
+}
+
+
+
+
+<div class="container">
+    <div class="col-lg-offset-1">
+
+        <table>
+            <tr>
+                <th>Id_articulo</th>
+                <th>Nnombre_articulo</th>
+                <th>Descripcion</th>
+                <th>Cantidad_disponible</th>
+                <th>Estado_articulo</th>
+                <th>Precio</th>
+                <th>Url_imagen</th>
+                <th></th>
+            </tr>
+            @{
+                foreach (var articulo in articulos)
+                {
+                    <tr>
+                        <td>@articulo.Id_articulo</td>
+                        <td>@articulo.Nnombre_articulo</td>
+                        <td>@articulo.Descripcion</td>
+                        <td>@articulo.Cantidad_disponible</td>
+                        <td>@articulo.Estado_articulo</td>
+                        <td>@articulo.Precio</td>
+                        <td>@articulo.Url_imagen</td>
+
+                        <td> <input onclick="document.location.href = '@Url.Content("~/Articulo/Edit/?Id="+articulo.Id_articulo)'" type="button" value="Editar" /> </td>
+                        <td> <input onclick="document.location.href = '@Url.Content("~/Articulo/Delete/?Id="+articulo.Id_articulo)'" type="button" value="Eliminar" /> </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+        @TempData["mensaje"]
+
+    </div>
+</div>
+
+
+
+
+
+
+

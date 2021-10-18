@@ -1,0 +1,51 @@
+﻿@using Lib_clases
+
+@{
+    ViewBag.Title = "Pedidos";
+}
+
+
+@{
+    List<Pedido> pedidos = (List<Pedido>)ViewBag.pedidos;
+}
+
+
+
+<div class="container">
+    <div class="col-lg-offset-2">
+
+        <h2>Listado de @ViewBag.Title</h2>
+
+
+        <table>
+            <tr>
+                <th>Id_pedido</th>
+                <th>Id_usuario</th>
+                <th>Estado_pedido</th>
+                <th>Fecha_solicitud</th>
+                <th>Fecha_entrega</th>
+                <th></th>
+            </tr>
+            @{
+                foreach (var pedido in pedidos)
+                {
+                    <tr>
+                        <td>@pedido.Id_pedido</td>
+                        <td>@pedido.Id_usuario</td>
+                        <td>@pedido.Estado_pedido</td>
+                        <td>@pedido.Fecha_solicitud</td>
+                        <td>@pedido.Fecha_entrega</td>
+                        <td> <input onclick="document.location.href = '@Url.Content("~/Pedido/Edit/?Id="+pedido.Id_pedido)'" type="button" value="Editar" /> </td>
+                        <td> <input onclick="document.location.href = '@Url.Content("~/Pedido/Delete/?Id="+pedido.Id_pedido)'" type="button" value="Eliminar" /> </td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+        @TempData["mensaje"]
+    </div>
+</div>
+
+
+
