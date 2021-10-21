@@ -5,39 +5,50 @@
     ViewBag.Title = "Crear";
 }
 
-@Html.ValidationSummary()
-
-
 <div class="container">
     <div class="col-lg-offset-5">
 
         <h2>Crear Usuario</h2>
 
-
         @using (Html.BeginForm())
         {
-            @Html.LabelFor(p => p.Nombre_usuario); <br />
+            @Html.LabelFor(p => p.Nombre_usuario);
+            <br />
             @Html.TextBoxFor(p => p.Nombre_usuario, new { @class = "aDatePicker", autocomplete = "off" });
+
+            @Html.ValidationMessageFor(p => p.Nombre_usuario, "", new { @class = "text-danger" })
+
             <br />
-            @Html.LabelFor(p => p.Clave); <br />
-            @Html.TextBoxFor(p => p.Clave, new { @class = "aDatePicker", autocomplete = "off" });
+            @Html.LabelFor(p => p.Clave);
             <br />
-            @Html.LabelFor(p => p.Nombre); <br />
+            @Html.PasswordFor(p => p.Clave, new { @class = "aDatePicker", autocomplete = "off" });
+            @Html.ValidationMessageFor(p => p.Clave, "", new { @class = "text-danger" })
+
+            <br />
+            @Html.LabelFor(p => p.Nombre);
+            <br />
             @Html.TextBoxFor(p => p.Nombre, new { @class = "aDatePicker", autocomplete = "off" });
+            @Html.ValidationMessageFor(p => p.Nombre, "", new { @class = "text-danger" })
             <br />
-            @Html.LabelFor(p => p.Apellido); <br />
+            @Html.LabelFor(p => p.Apellido);
+            <br />
             @Html.TextBoxFor(p => p.Apellido, new { @class = "aDatePicker", autocomplete = "off" });
+            @Html.ValidationMessageFor(p => p.Apellido, "", new { @class = "text-danger" })
             <br />
-            @Html.LabelFor(p => p.Edad); <br />
+            @Html.LabelFor(p => p.Edad);
+            <br />
             @Html.TextBoxFor(p => p.Edad, new { @class = "aDatePicker", autocomplete = "off" });
+            @Html.ValidationMessageFor(p => p.Edad, "", new { @class = "text-danger" })
             <br />
-            @Html.LabelFor(p => p.Tipo_usuario); <br />
+            @Html.LabelFor(p => p.Tipo_usuario);
+            <br />
             @Html.DropDownListFor(p => p.Tipo_usuario,
-                     new SelectList(Enum.GetValues(typeof(e_tipo_usuario))))
+                     new SelectList(Enum.GetValues(typeof(Usuario.e_tipo_usuario))))
             <br />
-            @Html.LabelFor(p => p.Estado_usuario); <br />
+            @Html.LabelFor(p => p.Estado_usuario);
+            <br />
             @Html.DropDownListFor(p => p.Estado_usuario,
-                     new SelectList(Enum.GetValues(typeof( e_estado_usuario ))))
+                     new SelectList(Enum.GetValues(typeof(Usuario.e_estado_usuario ))))
             <br />
 
             <button>Guardar</button>

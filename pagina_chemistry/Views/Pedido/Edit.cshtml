@@ -1,4 +1,5 @@
 ﻿@model Lib_clases.Pedido
+@using Lib_clases
 
 @{
     ViewBag.Title = "Editar";
@@ -12,18 +13,24 @@
 
         @using (Html.BeginForm())
         {
-            @Html.HiddenFor(p => p.Id_pedido)<br />
+            @Html.HiddenFor(p => p.Id_pedido);
+            <br />
 
-            @Html.LabelFor(p => p.Id_usuario);<br />
+            @Html.LabelFor(p => p.Id_usuario);
+            <br />
             @Html.TextBoxFor(p => p.Id_usuario, new { @class = "aDatePicker", autocomplete = "off" });
+            <d style="color:red;"> @Html.ValidationMessageFor(p => p.Id_usuario) </d>
             <br />
-            @Html.LabelFor(p => p.Estado_pedido);<br />
-            @Html.TextBoxFor(p => p.Estado_pedido, new { @class = "aDatePicker", autocomplete = "off" });
+            @Html.LabelFor(p => p.Estado_pedido);
             <br />
-            @Html.LabelFor(p => p.Fecha_solicitud);<br />
+            @Html.DropDownListFor(p => p.Estado_pedido, new SelectList(Enum.GetValues(typeof( Pedido.e_estado_pedido))))
+            <br />
+            @Html.LabelFor(p => p.Fecha_solicitud);
+            <br />
             @Html.TextBoxFor(p => p.Fecha_solicitud, new { @class = "aDatePicker", autocomplete = "off" });
             <br />
-            @Html.LabelFor(p => p.Fecha_entrega);<br />
+            @Html.LabelFor(p => p.Fecha_entrega);
+            <br />
             @Html.TextBoxFor(p => p.Fecha_entrega, new { @class = "aDatePicker", autocomplete = "off" });
             <br />
             <br />

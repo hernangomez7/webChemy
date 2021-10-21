@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Lib_clases;
+using Lib_negocio;
+using pagina_chemistry.Filtro;
 
 namespace pagina_chemistry.Controllers
 {
@@ -14,9 +16,7 @@ namespace pagina_chemistry.Controllers
 
         public ActionResult Index()
         {
-            
-             ViewBag.pedidos = new Pedido().LeerTodos();
-            
+             ViewBag.pedidos = PedidoN.LeerTodos();
             return View();
         }
         
@@ -24,12 +24,14 @@ namespace pagina_chemistry.Controllers
         {
             return View();
         }
-        
+
+        [AutorizacionUsuario(modulo: "pedido", operacion: "crear")]
         public ActionResult Create()
         {
             return View();
         }
-        
+
+        [AutorizacionUsuario(modulo: "pedido", operacion: "crearPost")]
         [HttpPost]
         public ActionResult Create( [Bind(Include = "Id_usuario,Estado_pedido,Fecha_solicitud,Fecha_entrega")]  Pedido pedido)
         {
@@ -41,7 +43,7 @@ namespace pagina_chemistry.Controllers
                     return View( pedido );
                 }
 
-                if ( pedido.Guardar() ) TempData["mensaje"] = "Guardado Correctamente.";
+                if ( PedidoN.Guardar( pedido ) ) TempData["mensaje"] = "Guardado Correctamente.";
                 else  TempData["mensaje"] = "No se pudo Guardar.";
                 return RedirectToAction( "Index" );
             }
@@ -51,10 +53,11 @@ namespace pagina_chemistry.Controllers
                 return View( pedido );
             }
         }
-        
+
+        [AutorizacionUsuario(modulo: "pedido", operacion: "modificar")]
         public ActionResult Edit(int id)
         {
-            Pedido p = new Pedido().Buscar( id );
+            Pedido p = PedidoN.Buscar( id );
 
             if( p == null )
             {
@@ -64,13 +67,14 @@ namespace pagina_chemistry.Controllers
 
             return View( p );
         }
-        
+
+        [AutorizacionUsuario(modulo: "pedido", operacion: "modificarPost")]
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id_pedido,Id_usuario,Estado_pedido,Fecha_solicitud,Fecha_entrega")] Pedido pedido  )
         {
             try
             {
-                pedido.Actualizar();
+                PedidoN.Actualizar( pedido );
                 TempData["mensaje"] = "Modificado Correctamente.";
                 return RedirectToAction("Index");
             }
@@ -79,17 +83,18 @@ namespace pagina_chemistry.Controllers
                 return View( pedido );
             }
         }
-        
+
+        [AutorizacionUsuario(modulo: "pedido", operacion: "borrar")]
         public ActionResult Delete(int id)
         {
 
-            if(new Pedido().Buscar(id) == null )
+            if(PedidoN.Buscar(id) == null )
             {
                 TempData["mensaje"] = "No se ha encontrado el elemento.";
                 return RedirectToAction("Index");
             }
 
-            if(new Pedido().Borrar(id))
+            if( PedidoN.Borrar(id))
             {
                 TempData["mensaje"] = "Borrado Exitosamente.";
                 return RedirectToAction("Index");//volvemos al inicio de la lista
@@ -97,7 +102,8 @@ namespace pagina_chemistry.Controllers
             TempData["mensaje"] = "No se a podido borrar!";
             return RedirectToAction("Index");
         }
-        
+
+        [AutorizacionUsuario(modulo: "pedido", operacion: "borrarPost")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

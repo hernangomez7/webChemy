@@ -117,9 +117,12 @@
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\ArticuloPedidoController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Filtro\AutorizacionUsuario.cs" />
+    <None Include="Filtro\nota" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +149,7 @@
     <Content Include="Views\Articulo_pedidoPedido\Index.cshtml" />
     <Content Include="Views\Articulo_pedidoPedido\Create.cshtml" />
     <Content Include="Views\Articulo_pedidoPedido\Edit.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,6 +167,17 @@
       <Project>{5727a56c-e91a-4e43-b2d3-b4b9361385b7}</Project>
       <Name>Lib_clases</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lib_Conexion\Lib_Conexion_Mapeo.csproj">
+      <Project>{E419876A-6FFC-40C0-BA19-7A1D254BD0D5}</Project>
+      <Name>Lib_Conexion_Mapeo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib_negocio\Lib_negocio.csproj">
+      <Project>{131f04a2-2b66-4531-8f9b-186d1e5c1231}</Project>
+      <Name>Lib_negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

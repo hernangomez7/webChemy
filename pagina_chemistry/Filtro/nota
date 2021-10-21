@@ -1,0 +1,6 @@
+﻿Los filtros en ASP.NET Core permiten que el código se ejecute antes o después de etapas específicas en la canalización de procesamiento de solicitudes.
+
+Los filtros incorporados manejan tareas como:
+
+Autorización, que impide el acceso a los recursos para los que un usuario no está autorizado.
+Almacenamiento en caché de respuestas, cortocircuito en la canalización de solicitudes para devolver una respuesta en caché.

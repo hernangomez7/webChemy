@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 using Lib_clases;
 using System.Web.Security;
+using Lib_negocio;
+using Lib_Conexion;
 
 namespace pagina_chemistry.Controllers
 {
@@ -27,12 +29,12 @@ namespace pagina_chemistry.Controllers
         [HttpPost]
         public ActionResult Login( Usuario usuario, string returnUrl  )
         {
-            if ( EsValido( usuario ))
+            if ( EsValido( usuario ) &&  !ModelState.IsValid)
             {
                 //cookies
                 FormsAuthentication.SetAuthCookie( usuario.Nombre_usuario, false );
 
-                //Session["tipoUsuario"] = usuario.Identificarse().Tipo_usuario;
+                Session["User"] = UsuarioN.Identificarse( usuario.Nombre_usuario );
 
                 if ( returnUrl != null)
                 {
@@ -41,9 +43,12 @@ namespace pagina_chemistry.Controllers
                 }
                 return RedirectToAction("Index", "Home");
             }
-            TempData["mensaje"] = "La contraseña o el usuario no es valido.";
+           
 
-            return RedirectToAction("Login", "Auth"); //View( usuario );
+            TempData["mensaje"] = "La contraseña o el usuario no es valido.";
+            return View();
+
+            // return RedirectToAction("Login", "Auth"); //View( usuario );
         }
 
         /// <summary>
@@ -51,7 +56,7 @@ namespace pagina_chemistry.Controllers
         /// </summary>
         public bool EsValido( Usuario usuario)
         {
-            return usuario.Autenticar();
+            return UsuarioN.Autenticar( usuario );
         }
 
         public ActionResult LogOut()

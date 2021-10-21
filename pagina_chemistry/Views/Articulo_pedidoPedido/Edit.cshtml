@@ -17,14 +17,20 @@
 
             @Html.HiddenFor(p => p.Id_artped)
 
-            @Html.LabelFor(p => p.Id_articulo);<br />
+            @Html.LabelFor(p => p.Id_articulo);
+            <br />
             @Html.TextBoxFor(p => p.Id_articulo, new { @class = "aDatePicker", autocomplete = "off" });
+            <d style="color:red;"> @Html.ValidationMessageFor(p => p.Id_articulo) </d>
             <br />
-            @Html.LabelFor(p => p.Id_pedido);<br />
+            @Html.LabelFor(p => p.Id_pedido);
+            <br />
             @Html.TextBoxFor(p => p.Id_pedido, new { @class = "aDatePicker", autocomplete = "off" });
+            <d style="color:red;"> @Html.ValidationMessageFor(p => p.Id_pedido) </d>
             <br />
-            @Html.LabelFor(p => p.Cantidad_solicitada);<br />
+            @Html.LabelFor(p => p.Cantidad_solicitada);
+            <br />
             @Html.TextBoxFor(p => p.Cantidad_solicitada, new { @class = "aDatePicker", autocomplete = "off" });
+            <d style="color:red;"> @Html.ValidationMessageFor(p => p.Cantidad_solicitada) </d>
             <br />
 
             <button>Guardar</button>

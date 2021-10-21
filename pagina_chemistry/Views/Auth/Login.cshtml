@@ -10,11 +10,15 @@
         <h2>Ingresa tus credenciales</h2>
         @using (Html.BeginForm())
         {
-            @Html.LabelFor(u => u.Nombre_usuario) <br />
-            @Html.TextBoxFor(u => u.Nombre_usuario, new { @class = "aDatePicker", autocomplete = "off" })
+            @Html.LabelFor(u => u.Nombre_usuario)
             <br />
-            @Html.LabelFor(u => u.Clave) <br />
-            @Html.TextBoxFor(u => u.Clave, new { @class = "aDatePicker", autocomplete = "off" })
+            @Html.TextBoxFor(u => u.Nombre_usuario, new { @class = "aDatePicker", autocomplete = "off" })
+            <d style="color:red;"> @Html.ValidationMessageFor(p => p.Nombre_usuario) </d>
+            <br />
+            @Html.LabelFor(u => u.Clave)
+            <br />
+            @Html.PasswordFor(u => u.Clave, new { @class = "aDatePicker", autocomplete = "off" })
+            <d style="color:red;"> @Html.ValidationMessageFor(p => p.Clave) </d>
             <br />
             <button>Ingresar</button>
             <input onclick="document.location.href = '@Url.Content("~/Usuario/Create")'" type="button" value="Crear Usuario" />
